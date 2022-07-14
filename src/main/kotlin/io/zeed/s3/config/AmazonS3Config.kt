@@ -1,11 +1,6 @@
 package io.zeed.s3.config
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider
-import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.services.s3.AmazonS3Client
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 /**
@@ -31,13 +26,4 @@ class AmazonS3Config(
     val regionStatic: String
 ) {
 
-    @Bean
-    fun amazonS3Client(): AmazonS3Client {
-        val awsCredential = BasicAWSCredentials(accessKey, secretKey)
-
-        return AmazonS3ClientBuilder.standard()
-            .withRegion(regionStatic)
-            .withCredentials(AWSStaticCredentialsProvider(awsCredential))
-            .build() as AmazonS3Client
-    }
 }

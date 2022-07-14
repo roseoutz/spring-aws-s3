@@ -13,3 +13,16 @@ cloud:
       static: ap-northeast-2
     stack:
       auto: false
+
+
+spring:
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      username: test
+      password: test123
+      database: aws_test
+      authentication-database: admin
+      repositories:
+        type: reactive

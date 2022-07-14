@@ -1,6 +1,10 @@
 package io.zeed.s3.handler
 
-import org.springframework.http.codec.multipart.FilePart
+import io.zeed.s3.dto.FileDownloadRequest
+import io.zeed.s3.dto.FileDownloadResponse
+import io.zeed.s3.dto.FileUploadRequest
+import io.zeed.s3.dto.FileUploadResponse
+import reactor.core.publisher.Mono
 
 /**
  *packageName    : io.zeed.s3.handler
@@ -13,7 +17,9 @@ import org.springframework.http.codec.multipart.FilePart
  * -----------------------------------------------------------
  * 2022/07/08        kimdonggyuuuuu       최초 생성
  */
-interface FileUploadHandler<T> {
+interface FileUploadHandler {
 
-    fun upload(file: FilePart): T
+    fun upload(fileUploadRequest: FileUploadRequest): Mono<FileUploadResponse>
+
+    fun download(fileDownloadRequest: FileDownloadRequest): Mono<FileDownloadResponse>
 }
