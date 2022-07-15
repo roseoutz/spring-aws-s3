@@ -1,21 +1,10 @@
-
 server:
   port: 8080
 
-cloud:
-  aws:
-    credentials:
-      access-key: AKIAVKUCUWUMPRGP2UWJ
-      secret-key: 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
-    s3:
-      bucket: zeed-bucket-s3
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-
-
 spring:
+  config:
+    import:
+      - 'classpath:config/aws.yml'
   data:
     mongodb:
       host: 127.0.0.1

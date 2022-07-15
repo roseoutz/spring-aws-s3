@@ -82,6 +82,11 @@ abstract class AbstractS3Test {
         val filePath = "sample.txt"
         val contentType = "text/plain"
 
+        fun getFileSize(): Long {
+            val file = getFile()
+            return file.length()
+        }
+
         fun getFile(): File {
             val url = this.javaClass.classLoader.getResource(filePath) ?: throw IllegalArgumentException("File Not Found")
 

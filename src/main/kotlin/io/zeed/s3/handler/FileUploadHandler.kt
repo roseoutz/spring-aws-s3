@@ -1,9 +1,6 @@
 package io.zeed.s3.handler
 
-import io.zeed.s3.dto.FileDownloadRequest
-import io.zeed.s3.dto.FileDownloadResponse
-import io.zeed.s3.dto.FileUploadRequest
-import io.zeed.s3.dto.FileUploadResponse
+import io.zeed.s3.dto.*
 import reactor.core.publisher.Mono
 
 /**
@@ -22,4 +19,6 @@ interface FileUploadHandler {
     fun upload(fileUploadRequest: FileUploadRequest): Mono<FileUploadResponse>
 
     fun download(fileDownloadRequest: FileDownloadRequest): Mono<FileDownloadResponse>
+
+    fun remove(fileRemoveRequest: FileRemoveRequest): Mono<FileRemoveResponse>
 }
