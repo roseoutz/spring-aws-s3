@@ -13,5 +13,6 @@ spring:
       password: test123
       database: aws_test
       authentication-database: admin
+      auto-index-creation: true
       repositories:
         type: reactive

@@ -4,6 +4,7 @@ import io.zeed.s3.config.props.AmazonS3Properties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
+import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.AwsCredentials
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider
@@ -26,18 +27,14 @@ import java.time.Duration
  * -----------------------------------------------------------
  * 2022/07/08        kimdonggyuuuuu       최초 생성
  */
-@Profile("!test")
+@Profile("test")
 @Configuration
-class AmazonS3Config {
+class TestAmazonS3Config {
 
     @Bean
-    fun awsCredentialsProvider(amazonS3Properties: AmazonS3Properties): AwsCredentialsProvider {
-        return AwsCredentialsProvider {
-            val credential: AwsCredentials = AwsBasicCredentials.create(amazonS3Properties.accessKey, amazonS3Properties.secretKey)
-            credential
-        }
+    fun awsCredentialsProvider(): AwsCredentialsProvider {
+        return AnonymousCredentialsProvider.create()
     }
-
 
     @Bean
     fun s3AsyncClient(amazonS3Properties: AmazonS3Properties, awsCredentialsProvider: AwsCredentialsProvider): S3AsyncClient {
@@ -54,6 +51,7 @@ class AmazonS3Config {
 
         return S3AsyncClient.builder()
             .httpClient(httpClient)
+            .endpointOverride(URI("http://127.0.0.1:12345"))
             .region(Region.of(amazonS3Properties.region))
             .credentialsProvider(awsCredentialsProvider)
             .serviceConfiguration(serviceConfig)
